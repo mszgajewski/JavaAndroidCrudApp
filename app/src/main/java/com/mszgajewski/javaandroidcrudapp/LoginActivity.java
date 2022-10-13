@@ -21,10 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextInputEditText userNameEdit, passwordEdit;
+    private TextInputEditText userName, password;
     private Button loginButton;
     private ProgressBar progressBar;
-    private TextView registerTextView;
+    private TextView loginQuestion;
     private FirebaseAuth mAuth;
 
     @Override
@@ -32,14 +32,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userNameEdit = findViewById(R.id.loginEditUserName);
-        passwordEdit = findViewById(R.id.loginEditPassword);
+        userName = findViewById(R.id.loginEditUserName);
+        password = findViewById(R.id.loginEditPassword);
         loginButton = findViewById(R.id.loginBtn);
         progressBar = findViewById(R.id.loginProgressBar);
-        registerTextView = findViewById(R.id.loginQuestion);
+        loginQuestion = findViewById(R.id.loginQuestion);
         mAuth = FirebaseAuth.getInstance();
 
-        registerTextView.setOnClickListener(new View.OnClickListener() {
+        loginQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
@@ -51,14 +51,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String userName = userNameEdit.getText().toString().trim();
-                String password = passwordEdit.getText().toString().trim();
+                String name = userName.getText().toString().trim();
+                String pwd = password.getText().toString().trim();
 
-                if (TextUtils.isEmpty(userName) && TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pwd)){
                     Toast.makeText(LoginActivity.this, "Proszę sprawdzić dane", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    mAuth.signInWithEmailAndPassword(userName,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(name,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){

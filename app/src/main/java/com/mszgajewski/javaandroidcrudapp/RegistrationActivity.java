@@ -20,10 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private TextInputEditText userNameEdit, passwordEdit, confirmPasswordEdit;
+    private TextInputEditText userName, password, confirmPassword;
     private Button regButton;
     private ProgressBar progressBar;
-    private TextView loginTextView;
+    private TextView regQuestion;
     private FirebaseAuth mAuth;
 
     @Override
@@ -31,15 +31,15 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        userNameEdit = findViewById(R.id.regEditUserName);
-        passwordEdit = findViewById(R.id.regEditPassword);
-        confirmPasswordEdit = findViewById(R.id.regCnfPassword);
+        userName = findViewById(R.id.regEditUserName);
+        password = findViewById(R.id.regEditPassword);
+        confirmPassword = findViewById(R.id.regEditCnfPassword);
         regButton = findViewById(R.id.regBtn);
         progressBar = findViewById(R.id.regProgressBar);
-        loginTextView = findViewById(R.id.regQuestion);
+        regQuestion = findViewById(R.id.regQuestion);
         mAuth = FirebaseAuth.getInstance();
 
-        loginTextView.setOnClickListener(new View.OnClickListener() {
+        regQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
@@ -51,16 +51,18 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String userName = userNameEdit.getText().toString().trim();
-                String password = passwordEdit.getText().toString().trim();
-                String confirmPassword = confirmPasswordEdit.getText().toString().trim();
+                String name = userName.getText().toString().trim();
+                String pwd = password.getText().toString().trim();
+                String cnfPassword = confirmPassword.getText().toString().trim();
 
-                if (!password.equals(confirmPassword)){
+                if (!pwd.equals(cnfPassword)){
                     Toast.makeText(RegistrationActivity.this, "Proszę sprawdić hasło", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(userName) && TextUtils.isEmpty(password) && TextUtils.isEmpty(confirmPassword)){
+                    return;
+                } else if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pwd) && TextUtils.isEmpty(cnfPassword)){
                     Toast.makeText(RegistrationActivity.this, "Proszę sprawdić dane", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
-                    mAuth.createUserWithEmailAndPassword(userName,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.createUserWithEmailAndPassword(name,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
