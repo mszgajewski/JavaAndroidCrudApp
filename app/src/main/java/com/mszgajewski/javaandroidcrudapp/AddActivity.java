@@ -32,7 +32,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
 
         itemName = findViewById(R.id.addItemName);
-        itemPrice = findViewById(R.id.addItemPrize);
+        itemPrice = findViewById(R.id.addItemPrice);
         itemSuited = findViewById(R.id.addItemSuited);
         itemImg = findViewById(R.id.addItemImageLink);
         itemLink = findViewById(R.id.addItemLink);

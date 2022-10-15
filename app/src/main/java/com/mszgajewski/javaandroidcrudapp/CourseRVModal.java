@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class CourseRVModal implements Parcelable {
 
     private String itemName ;
-    private String itemPrize;
+    private String itemPrice;
     private String itemSuited;
     private String itemImg;
     private String itemLink;
@@ -15,9 +15,9 @@ public class CourseRVModal implements Parcelable {
 
     public CourseRVModal(){}
 
-    public CourseRVModal(String itemName, String itemPrize, String itemSuited, String itemImg, String itemLink, String itemDesc, String courseId) {
+    public CourseRVModal(String itemName, String itemPrice, String itemSuited, String itemImg, String itemLink, String itemDesc, String courseId) {
         this.itemName = itemName;
-        this.itemPrize = itemPrize;
+        this.itemPrice = itemPrice;
         this.itemSuited = itemSuited;
         this.itemImg = itemImg;
         this.itemLink = itemLink;
@@ -27,7 +27,7 @@ public class CourseRVModal implements Parcelable {
 
     protected CourseRVModal(Parcel in) {
         itemName = in.readString();
-        itemPrize = in.readString();
+        itemPrice = in.readString();
         itemSuited = in.readString();
         itemImg = in.readString();
         itemLink = in.readString();
@@ -53,12 +53,12 @@ public class CourseRVModal implements Parcelable {
         this.itemName = itemName;
     }
 
-    public String getItemPrize() {
-        return itemPrize;
+    public String getItemPrice() {
+        return itemPrice;
     }
 
-    public void setItemPrize(String itemPrize) {
-        this.itemPrize = itemPrize;
+    public void setItemPrice(String itemPrize) {
+        this.itemPrice = itemPrize;
     }
 
     public String getItemSuited() {
@@ -109,7 +109,7 @@ public class CourseRVModal implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(itemName);
-        parcel.writeString(itemPrize);
+        parcel.writeString(itemPrice);
         parcel.writeString(itemSuited);
         parcel.writeString(itemImg);
         parcel.writeString(itemLink);

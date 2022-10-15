@@ -18,10 +18,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
-    private ArrayList<CourseRVModal> courseRVModalArrayList;
-    private Context context;
+    private final ArrayList<CourseRVModal> courseRVModalArrayList;
+    private final Context context;
     int lastPos = -1;
-    private CourseClickInterface courseClickInterface;
+    private final CourseClickInterface courseClickInterface;
 
     public CourseRVAdapter(ArrayList<CourseRVModal> courseRVModalArrayList, Context context, CourseClickInterface courseClickInterface) {
         this.courseRVModalArrayList = courseRVModalArrayList;
@@ -40,9 +40,11 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     public void onBindViewHolder(@NonNull CourseRVAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         CourseRVModal courseRVModal = courseRVModalArrayList.get(position);
         holder.itemName.setText(courseRVModal.getItemName());
-        holder.itemPrice.setText(courseRVModal.getItemPrize()+"zł");
+        holder.itemPrice.setText(courseRVModal.getItemPrice()+"zł");
         Picasso.get().load(courseRVModal.getItemImg()).into(holder.itemIV);
+
         setAnimation(holder.itemView,position);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +67,9 @@ public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView itemName, itemPrice;
-        private ImageView itemIV;
+        private final TextView itemName;
+        private final TextView itemPrice;
+        private final ImageView itemIV;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

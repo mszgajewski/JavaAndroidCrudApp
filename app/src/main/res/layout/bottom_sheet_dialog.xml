@@ -6,7 +6,7 @@
     android:background="@color/blue_shade_1">
 
     <TextView
-        android:id="@+id/itemNameTextView"
+        android:id="@+id/bottomTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -17,43 +17,43 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/itemImageView"
+        android:id="@+id/bottomImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@id/itemNameTextView"
+        android:layout_below="@id/bottomTextView"
         android:layout_margin="4dp"
         android:src="@mipmap/ic_launcher"
         android:padding="4dp"
         android:layout_centerVertical="true" />
 
     <TextView
-        android:id="@+id/descTextView"
+        android:id="@+id/bottomDescTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/itemNameTextView"
+        android:layout_below="@+id/bottomTextView"
         android:layout_margin="4dp"
-        android:layout_toRightOf="@id/itemImageView"
+        android:layout_toRightOf="@id/bottomImageView"
         android:padding="3dp"
         android:text="Opis"
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/itemSuitedForTextView"
+        android:id="@+id/bottomSuitedForTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_below="@id/descTextView"
-        android:layout_toRightOf="@id/itemImageView"
+        android:layout_below="@id/bottomDescTextView"
+        android:layout_toRightOf="@id/bottomImageView"
         android:text="Dla kogo"
         android:padding="3dp"
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/itemPriceTextView"
+        android:id="@+id/bottomPriceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/itemNameTextView"
-        android:layout_toRightOf="@id/itemSuitedForTextView"
+        android:layout_below="@id/bottomTextView"
+        android:layout_toRightOf="@id/bottomSuitedForTextView"
         android:layout_margin="4dp"
         android:padding="4dp"
         android:text="Cena"
@@ -66,10 +66,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_below="@id/itemPriceTextView">
+        android:layout_below="@id/bottomPriceTextView">
 
         <Button
-            android:id="@+id/editButton"
+            android:id="@+id/editBottomButton"
             android:layout_width="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

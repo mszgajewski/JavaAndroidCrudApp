@@ -46,11 +46,10 @@ public class EditActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.editProgressBar);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         courseRVModal = getIntent().getParcelableExtra("course");
         if(courseRVModal != null){
             itemName.setText(courseRVModal.getItemName());
-            itemPrice.setText(courseRVModal.getItemPrize());
+            itemPrice.setText(courseRVModal.getItemPrice());
             itemSuited.setText(courseRVModal.getItemSuited());
             itemImg.setText(courseRVModal.getItemImg());
             itemLink.setText(courseRVModal.getItemLink());
