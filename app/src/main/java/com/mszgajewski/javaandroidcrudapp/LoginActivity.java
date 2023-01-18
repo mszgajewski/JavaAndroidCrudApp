@@ -18,28 +18,24 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mszgajewski.javaandroidcrudapp.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextInputEditText userName, password;
-    private Button loginButton;
+    ActivityLoginBinding binding;
     private ProgressBar progressBar;
-    private TextView loginQuestion;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_login);
 
-        userName = findViewById(R.id.loginEditUserName);
-        password = findViewById(R.id.loginEditPassword);
-        loginButton = findViewById(R.id.loginBtn);
         progressBar = findViewById(R.id.loginProgressBar);
-        loginQuestion = findViewById(R.id.loginQuestion);
         mAuth = FirebaseAuth.getInstance();
 
-        loginQuestion.setOnClickListener(new View.OnClickListener() {
+        binding.loginQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
@@ -47,12 +43,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String name = userName.getText().toString().trim();
-                String pwd = password.getText().toString().trim();
+                String name = binding.loginEditUserName.getText().toString().trim();
+                String pwd = binding.loginEditPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pwd)){
                     Toast.makeText(LoginActivity.this, "Proszę sprawdzić dane", Toast.LENGTH_SHORT).show();

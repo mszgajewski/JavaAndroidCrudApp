@@ -17,29 +17,25 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mszgajewski.javaandroidcrudapp.databinding.ActivityRegistrationBinding;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private TextInputEditText userName, password, confirmPassword;
-    private Button regButton;
+    ActivityRegistrationBinding binding;
+
     private ProgressBar progressBar;
-    private TextView regQuestion;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        userName = findViewById(R.id.regEditUserName);
-        password = findViewById(R.id.regEditPassword);
-        confirmPassword = findViewById(R.id.regEditCnfPassword);
-        regButton = findViewById(R.id.regBtn);
         progressBar = findViewById(R.id.regProgressBar);
-        regQuestion = findViewById(R.id.regQuestion);
         mAuth = FirebaseAuth.getInstance();
 
-        regQuestion.setOnClickListener(new View.OnClickListener() {
+        binding.regQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
@@ -47,13 +43,13 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        regButton.setOnClickListener(new View.OnClickListener() {
+        binding.regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String name = userName.getText().toString().trim();
-                String pwd = password.getText().toString().trim();
-                String cnfPassword = confirmPassword.getText().toString().trim();
+                String name = binding.regEditUserName.getText().toString().trim();
+                String pwd = binding.regEditPassword.getText().toString().trim();
+                String cnfPassword = binding.regEditCnfPassword.getText().toString().trim();
 
                 if (!pwd.equals(cnfPassword)){
                     Toast.makeText(RegistrationActivity.this, "Proszę sprawdić hasło", Toast.LENGTH_SHORT).show();

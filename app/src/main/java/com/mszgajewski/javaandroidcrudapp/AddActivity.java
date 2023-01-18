@@ -16,11 +16,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mszgajewski.javaandroidcrudapp.databinding.ActivityAddBinding;
 
 public class AddActivity extends AppCompatActivity {
 
-    private TextInputEditText itemName, itemPrice, itemSuited, itemImg, itemLink, itemDesc;
-    private Button addButton;
+    ActivityAddBinding binding;
+
     private ProgressBar progressBar;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -29,30 +30,24 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityAddBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_add);
 
-        itemName = findViewById(R.id.addItemName);
-        itemPrice = findViewById(R.id.addItemPrice);
-        itemSuited = findViewById(R.id.addItemSuited);
-        itemImg = findViewById(R.id.addItemImageLink);
-        itemLink = findViewById(R.id.addItemLink);
-        itemDesc = findViewById(R.id.addItemDesc);
-        addButton = findViewById(R.id.addBtn);
         progressBar = findViewById(R.id.addProgressBar);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Courses");
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        binding.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String name  = itemName.getText().toString().trim();
-                String price = itemPrice.getText().toString().trim();
-                String suited = itemSuited.getText().toString().trim();
-                String image = itemImg.getText().toString().trim();
-                String link = itemLink.getText().toString().trim();
-                String description = itemDesc.getText().toString().trim();
+                String name  = binding.addItemName.getText().toString().trim();
+                String price = binding.addItemPrice.getText().toString().trim();
+                String suited = binding.addItemSuited.getText().toString().trim();
+                String image = binding.addItemImageLink.getText().toString().trim();
+                String link = binding.addItemLink.getText().toString().trim();
+                String description = binding.addItemDesc.getText().toString().trim();
                 courseId = name;
 
                 CourseRVModal courseRVModal = new CourseRVModal(name, price, suited, image, link, description, courseId);

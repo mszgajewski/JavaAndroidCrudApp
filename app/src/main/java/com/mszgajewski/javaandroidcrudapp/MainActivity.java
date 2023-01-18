@@ -29,10 +29,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mszgajewski.javaandroidcrudapp.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CourseRVAdapter.CourseClickInterface {
+
+    ActivityMainBinding binding;
 
     private RecyclerView itemRV;
     private ProgressBar progressBar;
