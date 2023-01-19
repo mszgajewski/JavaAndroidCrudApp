@@ -6,25 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.mszgajewski.javaandroidcrudapp.databinding.ActivityEditBinding;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditActivity extends AppCompatActivity {
 
-    private TextInputEditText itemName, itemPrice, itemSuited, itemImg, itemLink, itemDesc;
-    private Button editButton, deleteButton;
-    private ProgressBar progressBar;
+    ActivityEditBinding binding;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private String courseId;
@@ -33,42 +30,33 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
-
-        itemName = findViewById(R.id.editItemName);
-        itemPrice = findViewById(R.id.editItemPrice);
-        itemSuited = findViewById(R.id.editItemSuited);
-        itemImg = findViewById(R.id.editItemImage);
-        itemLink = findViewById(R.id.editItemLink);
-        itemDesc = findViewById(R.id.editItemDesc);
-        editButton = findViewById(R.id.editBtn);
-        deleteButton = findViewById(R.id.deleteBtn);
-        progressBar = findViewById(R.id.editProgressBar);
+        binding = ActivityEditBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         courseRVModal = getIntent().getParcelableExtra("course");
         if(courseRVModal != null){
-            itemName.setText(courseRVModal.getItemName());
-            itemPrice.setText(courseRVModal.getItemPrice());
-            itemSuited.setText(courseRVModal.getItemSuited());
-            itemImg.setText(courseRVModal.getItemImg());
-            itemLink.setText(courseRVModal.getItemLink());
-            itemDesc.setText(courseRVModal.getItemDesc());
+            binding.editItemName.setText(courseRVModal.getItemName());
+            binding.editItemPrice.setText(courseRVModal.getItemPrice());
+            binding.editItemSuited.setText(courseRVModal.getItemSuited());
+            binding.editItemImage.setText(courseRVModal.getItemImg());
+            binding.editItemLink.setText(courseRVModal.getItemLink());
+            binding.editItemDesc.setText(courseRVModal.getItemDesc());
             courseId = courseRVModal.getCourseId();
         }
 
         databaseReference = firebaseDatabase.getReference("Courses").child(courseId);
 
-        editButton.setOnClickListener(new View.OnClickListener() {
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                String name  = itemName.getText().toString().trim();
-                String price = itemPrice.getText().toString().trim();
-                String suited= itemSuited.getText().toString().trim();
-                String image = itemImg.getText().toString().trim();
-                String link =  itemLink.getText().toString().trim();
-                String description = itemDesc.getText().toString().trim();
+                binding.editProgressBar.setVisibility(View.VISIBLE);
+                String name  = binding.editItemName.getText().toString().trim();
+                String price = binding.editItemPrice.getText().toString().trim();
+                String suited= binding.editItemSuited.getText().toString().trim();
+                String image = binding.editItemImage.getText().toString().trim();
+                String link =  binding.editItemLink.getText().toString().trim();
+                String description = binding.editItemDesc.getText().toString().trim();
                 courseId = name;
 
                 Map <String,Object> map = new HashMap<>();
@@ -83,7 +71,7 @@ public class EditActivity extends AppCompatActivity {
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        progressBar.setVisibility(View.GONE);
+                        binding.editProgressBar.setVisibility(View.GONE);
                         databaseReference.updateChildren(map);
                         Toast.makeText(EditActivity.this, "Edytowano", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(EditActivity.this,MainActivity.class));
@@ -98,7 +86,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        binding.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteCourse();

@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class CourseRVAdapter extends RecyclerView.Adapter<CourseRVAdapter.ViewHolder> {
+
     private final ArrayList<CourseRVModal> courseRVModalArrayList;
     private final Context context;
     int lastPos = -1;

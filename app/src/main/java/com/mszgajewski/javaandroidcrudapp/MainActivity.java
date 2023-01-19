@@ -29,17 +29,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mszgajewski.javaandroidcrudapp.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CourseRVAdapter.CourseClickInterface {
 
-    ActivityMainBinding binding;
-
     private RecyclerView itemRV;
     private ProgressBar progressBar;
     private FloatingActionButton addFAB;
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ArrayList<CourseRVModal> courseRVModalArrayList;
@@ -135,11 +133,6 @@ public class MainActivity extends AppCompatActivity implements CourseRVAdapter.C
         editButton.setOnClickListener(view ->
             startActivity(new Intent(MainActivity.this,EditActivity.class)
                     .putExtra("course", courseRVModal)));
-
-           // Intent intent = new Intent(MainActivity.this, EditActivity.class);
-           // intent.putExtra("course", courseRVModal);
-           // startActivity(intent);
-
 
         detailsButton.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -23,16 +23,13 @@ import com.mszgajewski.javaandroidcrudapp.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_login);
-
-        progressBar = findViewById(R.id.loginProgressBar);
+        setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
         binding.loginQuestion.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
+                binding.loginProgressBar.setVisibility(View.VISIBLE);
                 String name = binding.loginEditUserName.getText().toString().trim();
                 String pwd = binding.loginEditPassword.getText().toString().trim();
 
@@ -58,13 +55,13 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                progressBar.setVisibility(View.VISIBLE);
+                                binding.loginProgressBar.setVisibility(View.VISIBLE);
                                 Toast.makeText(LoginActivity.this, "Zarejestrowano użytkownika", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
-                                progressBar.setVisibility(View.GONE);
+                                binding.loginProgressBar.setVisibility(View.GONE);
                                 Toast.makeText(LoginActivity.this, "Błąd rejestracji", Toast.LENGTH_SHORT).show();
 
                             }

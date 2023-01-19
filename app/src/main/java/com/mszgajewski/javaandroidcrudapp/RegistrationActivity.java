@@ -23,7 +23,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     ActivityRegistrationBinding binding;
 
-    private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
     @Override
@@ -32,7 +31,6 @@ public class RegistrationActivity extends AppCompatActivity {
         binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        progressBar = findViewById(R.id.regProgressBar);
         mAuth = FirebaseAuth.getInstance();
 
         binding.regQuestion.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
         binding.regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
+                binding.regProgressBar.setVisibility(View.VISIBLE);
                 String name = binding.regEditUserName.getText().toString().trim();
                 String pwd = binding.regEditPassword.getText().toString().trim();
                 String cnfPassword = binding.regEditCnfPassword.getText().toString().trim();
@@ -62,13 +60,13 @@ public class RegistrationActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                progressBar.setVisibility(View.GONE);
+                                binding.regProgressBar.setVisibility(View.GONE);
                                 Toast.makeText(RegistrationActivity.this, "Zarejestrowano użytkownika", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {
-                                progressBar.setVisibility(View.GONE);
+                                binding.regProgressBar.setVisibility(View.GONE);
                                 Toast.makeText(RegistrationActivity.this, "Błąd rejestracji", Toast.LENGTH_SHORT).show();
 
                             }
