@@ -99,5 +99,4 @@ public class EditActivity extends AppCompatActivity {
         Toast.makeText(this, "Usunięto", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(EditActivity.this,MainActivity.class));
     }
-
 }

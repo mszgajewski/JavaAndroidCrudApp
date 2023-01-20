@@ -54,7 +54,6 @@ public class AddActivity extends AppCompatActivity {
                         Toast.makeText(AddActivity.this,"Dodano", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(AddActivity.this,MainActivity.class));
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Toast.makeText(AddActivity.this, "Błąd " + error.toString(), Toast.LENGTH_SHORT).show();
@@ -62,6 +61,5 @@ public class AddActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 }
