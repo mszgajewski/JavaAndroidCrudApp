@@ -29,45 +29,39 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        binding.regQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        binding.regQuestion.setOnClickListener(view -> {
+            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        binding.regBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.regProgressBar.setVisibility(View.VISIBLE);
-                String name = binding.regEditUserName.getText().toString().trim();
-                String pwd = binding.regEditPassword.getText().toString().trim();
-                String cnfPassword = binding.regEditCnfPassword.getText().toString().trim();
+        binding.regBtn.setOnClickListener(view -> {
+            binding.regProgressBar.setVisibility(View.VISIBLE);
+            String name = binding.regEditUserName.getText().toString().trim();
+            String pwd = binding.regEditPassword.getText().toString().trim();
+            String cnfPassword = binding.regEditCnfPassword.getText().toString().trim();
 
-                if (!pwd.equals(cnfPassword)){
-                    Toast.makeText(RegistrationActivity.this, "Proszę sprawdić hasło", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pwd) && TextUtils.isEmpty(cnfPassword)){
-                    Toast.makeText(RegistrationActivity.this, "Proszę sprawdić dane", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    mAuth.createUserWithEmailAndPassword(name,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                binding.regProgressBar.setVisibility(View.GONE);
-                                Toast.makeText(RegistrationActivity.this, "Zarejestrowano użytkownika", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                binding.regProgressBar.setVisibility(View.GONE);
-                                Toast.makeText(RegistrationActivity.this, "Błąd rejestracji", Toast.LENGTH_SHORT).show();
-                            }
+            if (!pwd.equals(cnfPassword)){
+                Toast.makeText(RegistrationActivity.this, "Proszę sprawdić hasło", Toast.LENGTH_SHORT).show();
+                return;
+            } else if (TextUtils.isEmpty(name) && TextUtils.isEmpty(pwd) && TextUtils.isEmpty(cnfPassword)){
+                Toast.makeText(RegistrationActivity.this, "Proszę sprawdić dane", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                mAuth.createUserWithEmailAndPassword(name,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            binding.regProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(RegistrationActivity.this, "Zarejestrowano użytkownika", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            binding.regProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(RegistrationActivity.this, "Błąd rejestracji", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
+                    }
+                });
             }
         });
     }

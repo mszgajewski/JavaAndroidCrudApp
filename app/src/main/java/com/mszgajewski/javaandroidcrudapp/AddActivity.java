@@ -33,33 +33,30 @@ public class AddActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Courses");
 
-        binding.addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.addProgressBar.setVisibility(View.VISIBLE);
-                String name  = binding.addItemName.getText().toString().trim();
-                String price = binding.addItemPrice.getText().toString().trim();
-                String suited = binding.addItemSuited.getText().toString().trim();
-                String image = binding.addItemImageLink.getText().toString().trim();
-                String link = binding.addItemLink.getText().toString().trim();
-                String description = binding.addItemDesc.getText().toString().trim();
-                courseId = name;
+        binding.addBtn.setOnClickListener(view -> {
+            binding.addProgressBar.setVisibility(View.VISIBLE);
+            String name  = binding.addItemName.getText().toString().trim();
+            String price = binding.addItemPrice.getText().toString().trim();
+            String suited = binding.addItemSuited.getText().toString().trim();
+            String image = binding.addItemImageLink.getText().toString().trim();
+            String link = binding.addItemLink.getText().toString().trim();
+            String description = binding.addItemDesc.getText().toString().trim();
+            courseId = name;
 
-                CourseRVModal courseRVModal = new CourseRVModal(name, price, suited, image, link, description, courseId);
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        binding.addProgressBar.setVisibility(View.GONE);
-                        databaseReference.child(courseId).setValue(courseRVModal);
-                        Toast.makeText(AddActivity.this,"Dodano", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(AddActivity.this,MainActivity.class));
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AddActivity.this, "Błąd " + error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+            CourseRVModal courseRVModal = new CourseRVModal(name, price, suited, image, link, description, courseId);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    binding.addProgressBar.setVisibility(View.GONE);
+                    databaseReference.child(courseId).setValue(courseRVModal);
+                    Toast.makeText(AddActivity.this,"Dodano", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddActivity.this,MainActivity.class));
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(AddActivity.this, "Błąd " + error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }

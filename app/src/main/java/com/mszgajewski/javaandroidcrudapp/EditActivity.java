@@ -47,51 +47,43 @@ public class EditActivity extends AppCompatActivity {
 
         databaseReference = firebaseDatabase.getReference("Courses").child(courseId);
 
-        binding.editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.editProgressBar.setVisibility(View.VISIBLE);
-                String name  = binding.editItemName.getText().toString().trim();
-                String price = binding.editItemPrice.getText().toString().trim();
-                String suited= binding.editItemSuited.getText().toString().trim();
-                String image = binding.editItemImage.getText().toString().trim();
-                String link =  binding.editItemLink.getText().toString().trim();
-                String description = binding.editItemDesc.getText().toString().trim();
-                courseId = name;
+        binding.editBtn.setOnClickListener(view -> {
+            binding.editProgressBar.setVisibility(View.VISIBLE);
+            String name  = binding.editItemName.getText().toString().trim();
+            String price = binding.editItemPrice.getText().toString().trim();
+            String suited= binding.editItemSuited.getText().toString().trim();
+            String image = binding.editItemImage.getText().toString().trim();
+            String link =  binding.editItemLink.getText().toString().trim();
+            String description = binding.editItemDesc.getText().toString().trim();
+            courseId = name;
 
-                Map <String,Object> map = new HashMap<>();
-                map.put("itemName", name);
-                map.put("itemPrice",price);
-                map.put("itemSuited",suited);
-                map.put("itemImg",image);
-                map.put("itemLink",link);
-                map.put("itemDesc",description);
-                map.put("courseId",courseId);
+            Map <String,Object> map = new HashMap<>();
+            map.put("itemName", name);
+            map.put("itemPrice",price);
+            map.put("itemSuited",suited);
+            map.put("itemImg",image);
+            map.put("itemLink",link);
+            map.put("itemDesc",description);
+            map.put("courseId",courseId);
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        binding.editProgressBar.setVisibility(View.GONE);
-                        databaseReference.updateChildren(map);
-                        Toast.makeText(EditActivity.this, "Edytowano", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(EditActivity.this,MainActivity.class));
-                    }
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    binding.editProgressBar.setVisibility(View.GONE);
+                    databaseReference.updateChildren(map);
+                    Toast.makeText(EditActivity.this, "Edytowano", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(EditActivity.this,MainActivity.class));
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(EditActivity.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(EditActivity.this, "Błąd" + error.toString(), Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-            }
+                }
+            });
         });
 
-        binding.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteCourse();
-            }
-        });
+        binding.deleteBtn.setOnClickListener(view -> deleteCourse());
     }
 
     private void deleteCourse(){
