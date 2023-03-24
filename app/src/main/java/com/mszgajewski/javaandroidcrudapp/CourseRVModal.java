@@ -49,13 +49,16 @@ public class CourseRVModal implements Parcelable {
 
     public String getItemName() { return itemName; }
 
+
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
+
     public String getItemPrice() {
         return itemPrice;
     }
+
 
     public void setItemPrice(String itemPrize) {
         this.itemPrice = itemPrize;
