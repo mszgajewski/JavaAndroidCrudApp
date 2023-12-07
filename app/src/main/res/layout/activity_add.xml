@@ -66,7 +66,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:hint="Dla kogo"
+                android:hint="Kto"
                 style="@style/TextInputLayout"
                 android:padding="5dp"
                 android:textColorHint="@color/white"
