@@ -32,5 +32,4 @@
         app:tint="@color/white"
         android:layout_margin="20dp"
         app:backgroundTint="@color/blue_shade_2" />
-
 </RelativeLayout>
