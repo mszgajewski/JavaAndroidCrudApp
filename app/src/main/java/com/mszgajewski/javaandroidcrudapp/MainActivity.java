@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mszgajewski.javaandroidcrudapp.databinding.ActivityMainBinding;
 import com.mszgajewski.javaandroidcrudapp.databinding.BottomSheetDialogBinding;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CourseRVAdapter.CourseClickInterface {
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements CourseRVAdapter.C
     ActivityMainBinding binding;
     BottomSheetDialogBinding bottomSheetDialogBinding;
 
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ArrayList<CourseRVModal> courseRVModalArrayList;
     private CourseRVAdapter courseRVAdapter;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements CourseRVAdapter.C
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Courses");
         courseRVModalArrayList = new ArrayList<>();
         courseRVAdapter = new CourseRVAdapter(courseRVModalArrayList,this, this);
